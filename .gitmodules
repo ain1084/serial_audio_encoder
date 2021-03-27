@@ -1,0 +1,3 @@
+[submodule "test/serial_audio_decoder"]
+	path = test/serial_audio_decoder
+	url = https://github.com/ain1084/serial_audio_decoder.git
