@@ -51,7 +51,7 @@ module serial_audio_encoder #(parameter data_width = 32)(
                     shift <= i_data[data_width-2:0];
                     shift_count <= data_width - 2;
                     reg_lrclk <= !reg_lrclk;
-                    reg_sdata <= { reg_sdata[0], i_data[data_width-2] };
+                    reg_sdata <= { reg_sdata[0], i_data[data_width-1] };
                     is_underrun <= 1'b0;
                 end else begin
                     if (!is_underrun)
