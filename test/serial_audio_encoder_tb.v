@@ -1,11 +1,12 @@
 `timescale 1ns/1ps
+`default_nettype none
 
 module serial_audio_encoder_tb();
 
     localparam CLK_SCLK = 1000000000 / (44100 * 32); // 44.1KHz * 32
     localparam lrclk_polarity = 1'b0;
     localparam is_i2s = 1'b0;
-    localparam data_width = 16;
+    localparam audio_width = 16;
 
     initial begin
         $dumpfile("serial_audio_encoder_tb.vcd");
@@ -24,28 +25,28 @@ module serial_audio_encoder_tb();
     reg i_valid;
     wire i_ready;
     reg i_is_left;
-    reg [data_width-1:0] i_data;
+    reg [audio_width-1:0] i_audio;
 
-    serial_audio_encoder #(.data_width(data_width)) audio_encoder_ (
+    serial_audio_encoder #(.audio_width(audio_width)) audio_encoder_ (
         .reset(reset),
-        .sclk(Clock),
+        .clk(Clock),
         .is_i2s(is_i2s),
         .lrclk_polarity(lrclk_polarity),
         .i_valid(i_valid),
         .i_ready(i_ready),
         .i_is_left(i_is_left),
-        .i_data(i_data),
+        .i_audio(i_audio),
         .is_underrun(),
-        .osclk(),
-        .olrclk(),
-        .osdat()
+        .sclk(),
+        .lrclk(),
+        .sdo()
     );
 
-    task set_data(input is_left, input [31:0] data);
+    task set_audio(input is_left, input [31:0] audio);
         begin
             i_valid <= 1'b1;
             i_is_left <= is_left;
-            i_data <= data;
+            i_audio <= audio;
             wait (i_ready) @(posedge Clock);
             i_valid <= 1'b0;
             @(posedge Clock);
@@ -54,20 +55,20 @@ module serial_audio_encoder_tb();
 
     initial begin
         i_valid = 1'b0;
-        i_data = 1'b0;
+        i_audio = 1'b0;
         i_is_left = 1'b0;
         reset = 1'b1;
         repeat (2) @(posedge Clock) reset = 1'b1;
         repeat (2) @(posedge Clock) reset = 1'b0;
 
-        set_data(1'b1, 32'hAAAAAAAB);
-        set_data(1'b0, 32'hAAAAAAAA);
-        set_data(1'b1, 32'hAAAAAAAB);
-        set_data(1'b0, 32'hAAAAAAAA);
+        set_audio(1'b1, 32'hAAAAAAAB);
+        set_audio(1'b0, 32'hAAAAAAAA);
+        set_audio(1'b1, 32'hAAAAAAAB);
+        set_audio(1'b0, 32'hAAAAAAAA);
 
         repeat (128) @(posedge Clock);
 
-        set_data(1'b1, 32'hAAAAAAAA);
+        set_audio(1'b1, 32'hAAAAAAAA);
 
         repeat (128) @(posedge Clock);
 
