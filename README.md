@@ -2,7 +2,7 @@
 
 Serial audio (I2S or Left justified) encoder.
 
-![serial_audio_encoder](https://user-images.githubusercontent.com/14823909/113435242-5ff84280-941d-11eb-9f99-e2086f402560.png)
+![serial_audio_encoder](https://user-images.githubusercontent.com/14823909/113436176-35a78480-941f-11eb-936f-84346c20c97f.png)
 
 |Name|Direction|Description|
 |--|--|--|
