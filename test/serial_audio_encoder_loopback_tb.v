@@ -92,7 +92,7 @@ module serial_audio_encoder_loopback_tb();
         set_audio(1'b1, 32'hAAA7AAA3);
         set_audio(1'b0, 32'hAAA80AA4);
         set_audio(1'b1, 32'hAAA9AAA5);
-        set_audio(1'b0, 32'hAAAA0AA6);
+        set_audio(1'b0, 32'hAAAA0AA6);      // underrun
 /* 
         set_data(1'b1, 16'h1234);
         set_data(1'b0, 16'h5556);
