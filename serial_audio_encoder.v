@@ -32,7 +32,7 @@ module serial_audio_encoder #(parameter audio_width = 16)(
         if (reset) begin
             reg_lrclk <= 1'b1;  // Right channel at start
             is_next_left <= 1'b1;
-            is_underrun <= 1'b1;
+            is_underrun <= 1'b0;
             reg_sdata <= 2'b00;
             is_valid_shift <= 1'b0;
             shift <= 0;
@@ -55,10 +55,8 @@ module serial_audio_encoder #(parameter audio_width = 16)(
                     is_underrun <= 1'b0;
                 end else begin
                     // Underrun
-                    if (!is_underrun) begin
-                        reg_lrclk <= !reg_lrclk;
-                        is_next_left <= !is_next_left;
-                    end
+                    reg_lrclk <= 1'b1;
+                    is_next_left <= 1'b1;
                     is_valid_shift <= 1'b0;
                     reg_sdata <= 2'b00;
                     is_underrun <= 1'b1;
