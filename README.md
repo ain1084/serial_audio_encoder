@@ -20,8 +20,9 @@ Serial audio (I2S or Left justified) encoder.
 |sclk|output|Output SCLK signal|
 |lrclk|output|Output LRCLK signal|
 |sdo|output|Output DATA signal|
+|is_underrun|output|Underrun signal (active high)|
 
 ## Timming diagram
 
-![is_i2s=0 lrclk_polarity=0](https://user-images.githubusercontent.com/14823909/113442011-385ba700-942a-11eb-85fb-e7f5cdc02cf2.png)
-![is_i2s=1 lrclk_polarity=1](https://user-images.githubusercontent.com/14823909/113442408-f97a2100-942a-11eb-9c72-7e7eb5dd8038.png)
+![is_i2s=0 lrclk_polarity=0](https://user-images.githubusercontent.com/14823909/113443485-0c8df080-942d-11eb-8298-a3c18e720119.png)
+![is_i2s=1 lrclk_polarity=1](https://user-images.githubusercontent.com/14823909/113443487-0d268700-942d-11eb-801b-25a3510db615.png)
